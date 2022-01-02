@@ -1,10 +1,9 @@
 # Crypto App
 
 ![Preview](images/image1.png?raw=true)
-![Preview](images/image2.png?raw=true)
-![Preview](images/image3.png?raw=true)
 
-This is a crypto app. You can view a list of crypt coins adn view their historical data.
+
+This is a crypto app. You can view a list of crypt coins and view their historical data.
 
 # Tech Stack
 
