@@ -22,14 +22,6 @@ const Header = styled.div`
   font-family: "Roboto", sanserif;
 `;
 
-const Error = styled.div`
-  display: flex;
-  padding: 20px;
-  justify-content: center;
-  align-items: center;
-  background:"whitesmoke"
-  text:"#1111"
-`;
 const CoinsList = styled.ul``;
 
 const Coin = styled.li`
@@ -99,7 +91,7 @@ interface ICoin {
 }
 
 const Coins = () => {
-  const { isLoading: loading, data: coins, error } = useQuery<ICoin[]>("allcoins", fetchCoin);
+  const { isLoading: loading, data: coins } = useQuery<ICoin[]>("allcoins", fetchCoin);
   const setDarkMode = useSetRecoilState(isDarkAtom);
   const isDark = useRecoilValue(isDarkAtom);
   const toggleDarkMode = () => setDarkMode((prev) => !prev);
