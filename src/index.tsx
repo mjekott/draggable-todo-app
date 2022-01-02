@@ -4,14 +4,15 @@ import App from "./App";
 import { lightTheme } from "./theme";
 import { ThemeProvider } from "styled-components";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { RecoilRoot } from "recoil";
 
 const client = new QueryClient();
 
 ReactDOM.render(
-  <QueryClientProvider client={client}>
-    <ThemeProvider theme={lightTheme}>
+  <RecoilRoot>
+    <QueryClientProvider client={client}>
       <App />
-    </ThemeProvider>
-  </QueryClientProvider>,
+    </QueryClientProvider>
+  </RecoilRoot>,
   document.getElementById("root")
 );

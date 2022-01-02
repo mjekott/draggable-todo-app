@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
+import { useSetRecoilState, useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { fetchCoin } from "../api";
+import { isDarkAtom } from "../atoms";
 
 const Container = styled.div`
   padding: 0 10px;
@@ -16,6 +18,8 @@ const Header = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+  font-family: "Roboto", sanserif;
 `;
 
 const Error = styled.div`
@@ -29,7 +33,7 @@ const Error = styled.div`
 const CoinsList = styled.ul``;
 
 const Coin = styled.li`
-  background-color: white;
+  background-color: ${(props) => props.theme.textColor};
   color: ${(props) => props.theme.bgColor};
   padding: 20px;
   border-radius: 15px;
@@ -64,6 +68,26 @@ const Loader = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
+const Toggle = styled.button`
+  position: absolute;
+  right: 0;
+  display: inline-block;
+  background-color:transparent;
+  border:none;
+  height: 25px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:${(props) => props.theme.textColor};
+
+  span{
+    margin-right:1px;
+    color:inherit;
+  }
+
+}
+`;
 interface ICoin {
   id: string;
   name: string;
@@ -76,11 +100,18 @@ interface ICoin {
 
 const Coins = () => {
   const { isLoading: loading, data: coins, error } = useQuery<ICoin[]>("allcoins", fetchCoin);
+  const setDarkMode = useSetRecoilState(isDarkAtom);
+  const isDark = useRecoilValue(isDarkAtom);
+  const toggleDarkMode = () => setDarkMode((prev) => !prev);
 
   return (
     <Container>
       <Header>
-        <Title>Coin</Title>
+        <Title>Crypto Coin</Title>
+        <Toggle onClick={toggleDarkMode}>
+          <span>Mode</span>
+          <input type="checkbox" checked={isDark} />
+        </Toggle>
       </Header>
       {loading ? (
         <Loader>loading...</Loader>
