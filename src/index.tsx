@@ -1,10 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./App";
-import { lightTheme } from "./theme";
-import { ThemeProvider } from "styled-components";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { RecoilRoot } from "recoil";
+import App from "./App";
 
 const client = new QueryClient();
 

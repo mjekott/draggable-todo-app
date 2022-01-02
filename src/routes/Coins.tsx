@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
-import { useSetRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import { fetchCoin } from "../api";
 import { isDarkAtom } from "../atoms";
@@ -18,7 +18,7 @@ const Header = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
+  position: relative;P
   font-family: "Roboto", sanserif;
 `;
 
