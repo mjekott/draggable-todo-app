@@ -2,6 +2,7 @@ import { DragDropContext, Droppable, Draggable, DropResult } from "react-beautif
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { todoState } from "./atom";
+import DraggableCard from "./components/DraggableCard";
 
 const Wrapper = styled.div`
   display: flex;
@@ -58,13 +59,7 @@ function App() {
               <Board ref={provided.innerRef} {...provided.droppableProps}>
                 {todos.map((todo, index) => (
                   // key and draggable id must be the same
-                  <Draggable draggableId={todo} key={todo} index={index}>
-                    {(provided) => (
-                      <Card ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-                        {todo}
-                      </Card>
-                    )}
-                  </Draggable>
+                  <DraggableCard todo={todo} index={index} />
                 ))}
                 {provided.placeholder}
               </Board>
