@@ -1,15 +1,15 @@
 # Crypto App
 
-![Preview](images/image1.png?raw=true)
+![Preview](images/todo.png?raw=true)
 
-
-This is a crypto app. You can view a list of crypt coins and view their historical data.
+This is a todo app that implements draggable functionalities
 
 # Tech Stack
 
 - React
-- Coingecko Api
-- Apex Chart
+- Styled-components
+- React-beautiful-dnd
+- React Hook Form
 - Recoil (State Management)
 
 ## How to run the application
