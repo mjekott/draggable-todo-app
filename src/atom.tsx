@@ -5,7 +5,15 @@ export const isDarkState = atom({
   default: false,
 });
 
-export const todoState = atom({
+interface ITodoState {
+  [key: string]: string[];
+}
+
+export const todoState = atom<ITodoState>({
   key: "todoState",
-  default: ["a", "b", "c", "d", "e", "f"],
+  default: {
+    todos: ["a", "b", "c"],
+    doing: ["d", "e", "f"],
+    done: ["g"],
+  },
 });
