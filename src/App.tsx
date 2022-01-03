@@ -23,7 +23,7 @@ const Boards = styled.div`
 
 function App() {
   const [todoState, setTodos] = useRecoilState(State);
-  const onDragEnd = ({ destination, draggableId, source }: DropResult) => {
+  const onDragEnd = ({ destination, source }: DropResult) => {
     if (!destination) {
       return;
     }
@@ -32,8 +32,9 @@ function App() {
       // same board
       setTodos((allboard) => {
         const boardCopy = [...allboard[source.droppableId]];
+        const taskObj = boardCopy[source.index];
         boardCopy.splice(source.index, 1);
-        boardCopy.splice(destination.index, 0, draggableId);
+        boardCopy.splice(destination.index, 0, taskObj);
         return { ...allboard, [source.droppableId]: boardCopy };
       });
     }
@@ -42,8 +43,9 @@ function App() {
       setTodos((allboard) => {
         const sourceBoard = [...allboard[source.droppableId]];
         const destinationBoard = [...allboard[destination.droppableId]];
+        const taskObj = sourceBoard[source.index];
         sourceBoard.splice(source.index, 1);
-        destinationBoard.splice(destination.index, 0, draggableId);
+        destinationBoard.splice(destination.index, 0, taskObj);
         return { ...allboard, [source.droppableId]: sourceBoard, [destination.droppableId]: destinationBoard };
       });
     }
@@ -52,8 +54,8 @@ function App() {
     <Wrapper>
       <Boards>
         <DragDropContext onDragEnd={onDragEnd}>
-          {Object.keys(todoState).map((todos) => (
-            <Board boardId={todos} todos={todoState[todos]} />
+          {Object.keys(todoState).map((todos, index) => (
+            <Board boardId={todos} todos={todoState[todos]} key={index} />
           ))}
         </DragDropContext>
       </Boards>

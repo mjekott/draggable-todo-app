@@ -5,15 +5,20 @@ export const isDarkState = atom({
   default: false,
 });
 
+export interface Todo {
+  id: number;
+  text: string;
+}
+
 interface ITodoState {
-  [key: string]: string[];
+  [key: string]: Todo[];
 }
 
 export const todoState = atom<ITodoState>({
   key: "todoState",
   default: {
-    todos: ["a", "b", "c"],
-    doing: ["d", "e", "f"],
-    done: ["g"],
+    todos: [],
+    doing: [],
+    done: [],
   },
 });

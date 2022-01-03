@@ -1,9 +1,10 @@
 import React from "react";
 import { Draggable } from "react-beautiful-dnd";
 import styled from "styled-components";
+import { Todo } from "../atom";
 
 interface Props {
-  todo: string;
+  todo: Todo;
   index: number;
 }
 
@@ -17,10 +18,10 @@ const Card = styled.div<{ isDragging: boolean }>`
 
 const DraggableCard: React.FC<Props> = ({ todo, index }) => {
   return (
-    <Draggable draggableId={todo} key={todo} index={index}>
+    <Draggable draggableId={todo.id + ""} key={todo.id} index={index}>
       {(provided, snapshot) => (
         <Card ref={provided.innerRef} isDragging={snapshot.isDragging} {...provided.draggableProps} {...provided.dragHandleProps}>
-          {todo}
+          {todo.text}
         </Card>
       )}
     </Draggable>
