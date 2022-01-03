@@ -10,6 +10,8 @@ const Wrapper = styled.div`
   background-color: ${(props) => props.theme.boardColor};
   border-radius: 5px;
   min-height: 300px;
+  display: flex;
+  flex-direction: column;
 `;
 
 const Title = styled.h2`
@@ -17,6 +19,12 @@ const Title = styled.h2`
   font-weight: 600;
   margin-bottom: 10px;
   font-size: 18px;
+`;
+
+const Area = styled.div<{ isDraggingOver: boolean; isDraggingFromThis: boolean }>`
+  background-color: ${(props) => (props.isDraggingOver ? "#dfe6e9" : props.isDraggingFromThis ? "#b2bec3" : "transparent")};};
+  flex-grow: 1;
+  transition: background-color 0.3s ease-in-out;
 `;
 interface Props {
   todos: string[];
@@ -28,14 +36,14 @@ const Board: React.FC<Props> = ({ todos, boardId }) => {
     <Wrapper>
       <Title>{boardId}</Title>
       <Droppable droppableId={boardId}>
-        {(provided) => (
-          <div ref={provided.innerRef} {...provided.droppableProps}>
+        {(provided, snapshot) => (
+          <Area ref={provided.innerRef} isDraggingOver={snapshot.isDraggingOver} isDraggingFromThis={Boolean(snapshot.draggingFromThisWith)} {...provided.droppableProps}>
             {todos.map((todo, index) => (
               // key and draggable id must be the same
               <DraggableCard todo={todo} index={index} />
             ))}
             {provided.placeholder}
-          </div>
+          </Area>
         )}
       </Droppable>
     </Wrapper>
